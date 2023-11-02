@@ -16,7 +16,7 @@ endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(my-cpp-project CXX)
+project(my-cpp-project CXX C)
 
 add_subdirectory(test)
 add_subdirectory(src)
