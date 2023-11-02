@@ -2,10 +2,13 @@
 	
 CLANG_FORMAT=clang-format-14
 
-CMAKE_ARGS+=-DCMAKE_TOOLCHAIN_FILE=$(VCPKG_ROOT)/scripts/buildsystems/vcpkg.cmake
+LLVM_CMAKE_DIR=$(shell llvm-config-16 --cmakedir)
+CMAKE_ARGS+=-DCMAKE_TOOLCHAIN_FILE=$(VCPKG_ROOT)/scripts/buildsystems/vcpkg.cmake \
+-DCMAKE_PREFIX_PATH=$(LLVM_CMAKE_DIR) \
+-DLLVM_DIR=$(LLVM_CMAKE_DIR)
 
 configure: FORCE
-	cmake -GNinja -S . -B build $(CMAKE_ARGS)
+	cmake -GNinja -S . -B build $(CMAKE_ARGS) $(CMAKE_EXTRA_ARGS)
 
 build:
 	ninja -C build
